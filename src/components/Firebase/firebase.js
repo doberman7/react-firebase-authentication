@@ -21,6 +21,12 @@ class Firebase {
 
     doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
+    // set up the login/sign-in function
+    doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+    //In case of the sign out function, we don’t need to pass any arguments to it, because Firebase knows about the currently authenticated user.
+    doSignOut = () => this.auth.signOut();
+
 }
 
 export default Firebase;
