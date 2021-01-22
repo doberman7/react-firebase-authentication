@@ -18,7 +18,8 @@ class Firebase {
 
   }
     // *** Auth API ***
-
+    //se incluye el prefijo do... a los métodos, de tal q no se necesita agregar firebase.auth()....como en firebase.auth().signInWithEmailAndPassword(email, password)
+    //Crea un formulario que permita a los usuarios nuevos registrarse en la app mediante su dirección de correo electrónico y una contraseña. Cuando un usuario complete el formulario, valida la dirección de correo electrónico y la contraseña que proporcionó para después pasarlos al método createUserWithEmailAndPassword:
     doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
     // set up the login/sign-in function
