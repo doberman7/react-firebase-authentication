@@ -26,6 +26,11 @@ class Firebase {
     this.auth.signInWithEmailAndPassword(email, password);
     //In case of the sign out function, we don’t need to pass any arguments to it, because Firebase knows about the currently authenticated user.
     doSignOut = () => this.auth.signOut();
+    //There are two more authentication methods to reset and change a password for an authenticated user:
+    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+    doPasswordUpdate = password =>
+    this.auth.currentUser.updatePassword(password);
+
 
 }
 
