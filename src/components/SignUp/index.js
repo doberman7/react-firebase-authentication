@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from "../../constants/routes";
 
 const SignUpPage = () => (
   <div>
@@ -11,10 +11,10 @@ const SignUpPage = () => (
 );
 //initialize the state of the component. It will capture user information such as username, email, and password. There will be a second password field/state for password confirmation.initialize the state of the component. It will capture user information such as username, email, and password. There will be a second password field/state for password confirmation.The state is initialized by an object destructuring. This way, we can use the initial state object to reset the state after a successful sign-up.
 const INITIAL_STATE = {
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
+  username: "",
+  email: "",
+  passwordOne: "",
+  passwordTwo: "",
   error: null,
 };
 
@@ -23,26 +23,21 @@ class SignUpForm extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-
   }
 
-  onSubmit = event => {
-
-  }
+  onSubmit = (event) => {};
   //he input fields need to update the local state of the component by using an onChange handler
-  onChange = event => {
+  onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-
   };
 
   render() {
-    const {
-      username,
-      email,
-      passwordOne,
-      passwordTwo,
-      error,
-    } = this.state;
+    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const isInvalid =
+      passwordOne !== passwordTwo ||
+      passwordOne === "" ||
+      email === "" ||
+      username === "";
     return (
       <form onSubmit={this.onSubmit}>
         <input
@@ -73,7 +68,9 @@ class SignUpForm extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        <button type="submit">Sign Up</button>
+        <button disabled={isInvalid} type="submit">
+          Sign Up
+        </button>
 
         {error && <p>{error.message}</p>}
       </form>
