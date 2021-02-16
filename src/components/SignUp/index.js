@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withFirebase } from "../Firebase";
+import { Link, withRouter } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
+    <SignUpForm />
+
     <SignUpForm />
   </div>
 );
@@ -18,14 +21,28 @@ const INITIAL_STATE = {
   error: null,
 };
 
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = (event) => {};
+  onSubmit = (event) => {
+    const { username, email, passwordOne } = this.state;
+
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then((authUser) => {
+        this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME); //The history object of the router can eventually be used in the onSubmit() class method. If a request resolves successfully, we can push any route to the history object. Since the pushed /home route is defined in our App component with a matching component to be rendered, the displayed page component will change after the redirect.
+      })
+      .catch((error) => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
   //he input fields need to update the local state of the component by using an onChange handler
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -83,6 +100,8 @@ const SignUpLink = () => (
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
 );
+//Any component that goes in the withRouter() higher-order component gains access to all properties of the router.
+const SignUpForm = withRouter(withFirebase(SignUpFormBase)); //So, when the enhanced SignUpFormBase component is passed to the withRouter() higher-order component, it has access to the props of the router.
 
 export default SignUpPage;
 
