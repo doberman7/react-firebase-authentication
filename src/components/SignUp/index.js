@@ -8,8 +8,6 @@ const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
     <SignUpForm />
-
-    <SignUpForm />
   </div>
 );
 //initialize the state of the component. It will capture user information such as username, email, and password. There will be a second password field/state for password confirmation.initialize the state of the component. It will capture user information such as username, email, and password. There will be a second password field/state for password confirmation.The state is initialized by an object destructuring. This way, we can use the initial state object to reset the state after a successful sign-up.
