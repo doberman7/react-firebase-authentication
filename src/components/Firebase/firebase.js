@@ -3,11 +3,9 @@ import "firebase/auth";
 
 const dotenv = require("dotenv");
 
-// if (process.env.NODE_ENV !== "production") {
-dotenv.config();
-// }
-
-console.log(process.env.REACT_APP_API_KEY);
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,

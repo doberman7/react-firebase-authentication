@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withFirebase } from "../Firebase";
 import { Link, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
 import * as ROUTES from "../../constants/routes";
 
@@ -99,8 +100,8 @@ const SignUpLink = () => (
   </p>
 );
 //Any component that goes in the withRouter() higher-order component gains access to all properties of the router.
-const SignUpForm = withRouter(withFirebase(SignUpFormBase)); //So, when the enhanced SignUpFormBase component is passed to the withRouter() higher-order component, it has access to the props of the router.
-
+// const SignUpForm = withRouter(withFirebase(SignUpFormBase)); //So, when the enhanced SignUpFormBase component is passed to the withRouter() higher-order component, it has access to the props of the router.
+const SignUpForm = compose(withRouter, withFirebase)(SignUpFormBase); //We can use recompose to organize our higher-order components. Since the higher-order components don’t depend on each other, the order doesn’t matter. But it may be helpful to know that the compose function applies to the higher-order components from right to left
 export default SignUpPage;
 
 export { SignUpForm, SignUpLink };
