@@ -1,5 +1,13 @@
-import app from 'firebase/app';
-import 'firebase/auth';
+import app from "firebase/app";
+import "firebase/auth";
+
+const dotenv = require("dotenv");
+
+// if (process.env.NODE_ENV !== "production") {
+dotenv.config();
+// }
+
+console.log(process.env.REACT_APP_API_KEY);
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,27 +20,23 @@ const config = {
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);    
+    app.initializeApp(config);
     this.auth = app.auth();
-
-
   }
-    // *** Auth API ***
-    //se incluye el prefijo do... a los métodos, de tal q no se necesita agregar firebase.auth()....como en firebase.auth().signInWithEmailAndPassword(email, password)
-    //Crea un formulario que permita a los usuarios nuevos registrarse en la app mediante su dirección de correo electrónico y una contraseña. Cuando un usuario complete el formulario, valida la dirección de correo electrónico y la contraseña que proporcionó para después pasarlos al método createUserWithEmailAndPassword:
-    doCreateUserWithEmailAndPassword = (email, password) =>
+  // *** Auth API ***
+  //se incluye el prefijo do... a los métodos, de tal q no se necesita agregar firebase.auth()....como en firebase.auth().signInWithEmailAndPassword(email, password)
+  //Crea un formulario que permita a los usuarios nuevos registrarse en la app mediante su dirección de correo electrónico y una contraseña. Cuando un usuario complete el formulario, valida la dirección de correo electrónico y la contraseña que proporcionó para después pasarlos al método createUserWithEmailAndPassword:
+  doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
-    // set up the login/sign-in function
-    doSignInWithEmailAndPassword = (email, password) =>
+  // set up the login/sign-in function
+  doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
-    //In case of the sign out function, we don’t need to pass any arguments to it, because Firebase knows about the currently authenticated user.
-    doSignOut = () => this.auth.signOut();
-    //There are two more authentication methods to reset and change a password for an authenticated user:
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-    doPasswordUpdate = password =>
+  //In case of the sign out function, we don’t need to pass any arguments to it, because Firebase knows about the currently authenticated user.
+  doSignOut = () => this.auth.signOut();
+  //There are two more authentication methods to reset and change a password for an authenticated user:
+  doPasswordReset = (email) => this.auth.sendPasswordResetEmail(email);
+  doPasswordUpdate = (password) =>
     this.auth.currentUser.updatePassword(password);
-
-
 }
 
 export default Firebase;
