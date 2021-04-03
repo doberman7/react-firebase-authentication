@@ -1,14 +1,5 @@
-// import React from 'react';
-
-// const Session = () => (
-//   <div>
-//     <h1>Session</h1>
-//   </div>
-// );
-
-// export default Session;
-
-//called on App
 import AuthUserContext from "./context";
+//export the higher-order component <withAuthentication>, so that it can be used in the App component afterward:
+import withAuthentication from "./withAuthentication";
 
-export { AuthUserContext };
+export { AuthUserContext, withAuthentication };
