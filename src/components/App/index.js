@@ -12,6 +12,8 @@ import AdminPage from "../Admin";
 import { withFirebase } from "../Firebase";
 
 import * as ROUTES from "../../constants/routes";
+//The App component can use the new context in order to provide the authenticated user to components that are interested in using it
+import { AuthUserContext } from "../Session";
 
 class App extends Component {
   constructor(props) {
@@ -37,24 +39,27 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Navigation authUser={this.state.authUser} />
-          <hr />
+      <AuthUserContext.Provider value={this.state.authUser}>
+        <Router>
+          <div>
+            {/* <Navigation authUser={this.state.authUser} /> */}
+            <Navigation />
+            <hr />
 
-          <Route exact path={ROUTES.LANDING} component={LandingPage} />
-          <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
-          <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-          <Route
-            exact
-            path={ROUTES.PASSWORD_FORGET}
-            component={PasswordForgetPage}
-          />
-          <Route exact path={ROUTES.HOME} component={HomePage} />
-          <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
-          <Route exact path={ROUTES.ADMIN} component={AdminPage} />
-        </div>
-      </Router>
+            <Route exact path={ROUTES.LANDING} component={LandingPage} />
+            <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
+            <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+            <Route
+              exact
+              path={ROUTES.PASSWORD_FORGET}
+              component={PasswordForgetPage}
+            />
+            <Route exact path={ROUTES.HOME} component={HomePage} />
+            <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+            <Route exact path={ROUTES.ADMIN} component={AdminPage} />
+          </div>
+        </Router>
+      </AuthUserContext.Provider>
     );
   }
 }

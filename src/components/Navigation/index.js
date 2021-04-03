@@ -4,8 +4,14 @@ import { Link } from "react-router-dom";
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
+//The authUser does not need to be passed to the Navigation component anymore. Instead, the Navigation component uses the new context to consume the authenticated user
+import { AuthUserContext } from "../Session";
 const Navigation = ({ authUser }) => (
-  <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+  <div>
+    <AuthUserContext.Consumer>
+      {(authUser) => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+    </AuthUserContext.Consumer>
+  </div>
 );
 
 const NavigationAuth = () => (
