@@ -9,6 +9,7 @@ import PasswordForgetPage from "../PasswordForget";
 import HomePage from "../Home";
 import AccountPage from "../Account";
 import AdminPage from "../Admin";
+import { withFirebase } from "../Firebase";
 
 import * as ROUTES from "../../constants/routes";
 
@@ -19,6 +20,19 @@ class App extends Component {
     this.state = {
       authUser: null,
     };
+  }
+  componentDidMount() {
+    //onAuthStateChanged() receives a function as a parameter that has access to the authenticated user.
+    //The passed function is called every time something changes for the authenticated user.
+    //It is called when a user signs up, signs in, and signs out.
+    //onAuthStateChanged() receives a function as a parameter that has access to the authenticated user.
+    //The passed function is called every time something changes for the authenticated user.
+    //It is called when a user signs up, signs in, and signs out.
+    this.props.firebase.auth.onAuthStateChanged((authUser) => {
+      authUser
+        ? this.setState({ authUser })
+        : this.setState({ authUser: null });
+    });
   }
 
   render() {
@@ -45,4 +59,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withFirebase(App);
