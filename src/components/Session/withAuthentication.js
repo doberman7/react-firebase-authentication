@@ -2,7 +2,7 @@ import React from "react";
 
 import AuthUserContext from "./context";
 import { withFirebase } from "../Firebase";
-
+//this is HOC
 const withAuthentication = (Component) => {
   class WithAuthentication extends React.Component {
     constructor(props) {
