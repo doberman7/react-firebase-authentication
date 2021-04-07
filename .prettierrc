@@ -1,9 +1,0 @@
-// add point at the start of the this copied file
-{
- "printWidth": 100,
- "singleQuote": true,
- "semi": true,
- "tabWidth": 2,
- "trailingComma": "all",
- "endOfLine": "auto"
-}
