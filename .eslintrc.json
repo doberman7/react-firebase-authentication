@@ -1,0 +1,15 @@
+// add point at the start of the this copied file
+
+{
+  "extends": "react-app",
+   "rules": {
+    "no-debugger":"warn",
+    "no-console": "warn", 
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}
