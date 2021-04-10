@@ -38,6 +38,9 @@ class Firebase {
   doPasswordReset = (email) => this.auth.sendPasswordResetEmail(email);
   doPasswordUpdate = (password) =>
     this.auth.currentUser.updatePassword(password);
+    user = uid => this.db.ref(`users/${uid}`);//he paths in the ref() method match the location where our entities (users) will be stored in Firebase’s Real-time Database API.
+
+    users = () => this.db.ref('users');  
 }
 
 export default Firebase;
