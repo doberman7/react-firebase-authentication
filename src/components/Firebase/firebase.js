@@ -1,5 +1,6 @@
 import app from "firebase/app";
 import "firebase/auth";
+import 'firebase/database';
 
 const dotenv = require("dotenv");
 
@@ -20,6 +21,8 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
+    this.db = app.database();// initialize the Real-time Database API for our Firebase class
+
   }
   // *** Auth API ***
   //se incluye el prefijo do... a los métodos, de tal q no se necesita agregar firebase.auth()....como en firebase.auth().signInWithEmailAndPassword(email, password)
