@@ -25,6 +25,7 @@ const withAuthorization = condition => Component => {
     render() {
       return (
        // to avoid showing the protected page before the redirect happens. 
+       //?
        <AuthUserContext.Consumer>
           {authUser =>
             condition(authUser) ? <Component {...this.props} /> : null
